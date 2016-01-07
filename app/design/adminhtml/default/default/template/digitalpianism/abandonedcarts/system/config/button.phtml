@@ -1,0 +1,17 @@
+<script type="text/javascript">
+    //<![CDATA[
+    function send() {
+        new Ajax.Request('<?php echo $this->getAjaxCheckUrl() ?>', {
+            method:     'get',
+            onSuccess: function(transport){
+ 
+            if (transport.responseText){
+                alert('Abandoned carts notifications have been sent')
+            }
+            }
+        });
+    }
+    //]]>
+</script>
+ 
+<?php echo $this->getButtonHtml() ?>

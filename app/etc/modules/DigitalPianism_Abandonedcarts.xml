@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<DigitalPianism_Abandonedcarts>
+			<active>true</active>
+			<codePool>community</codePool>
+		</DigitalPianism_Abandonedcarts>
+	</modules>
+</config>

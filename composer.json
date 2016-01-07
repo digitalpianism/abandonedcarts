@@ -1,0 +1,18 @@
+{
+  "name": "digitalpianism/abandonedcarts",
+  "type": "magento-module",
+  "license":"OSL-3.0",
+  "description":"Notifies customers when they abandoned their carts",
+  "authors":[
+    {
+      "name":"Raphael Petrini",
+      "email":"contact@digital-pianism.com"
+    }
+  ],
+  "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:digitalpianism/abandonedcarts.git"
+        }
+    ]
+}

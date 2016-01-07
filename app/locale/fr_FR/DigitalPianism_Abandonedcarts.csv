@@ -1,0 +1,17 @@
+Abandoned Carts Email,Email des paniers abandonn&eacute;s
+Abandoned Carts Emails,Emails des paniers abandonn&eacute;s
+Enable Abandoned Carts Notification,Activer les notifications de paniers abandonn&eacute;s
+Enable Sale Abandoned Carts Notification,Activer les notifications de paniers abandonn&eacute;s en promo
+Dry Run,Test
+Setting this parameter to Yes will log all the email addresses supposed to receive a notification into the var/log/digitalpianism_abandonedcarts.log file and will not send the real email notification,Mettre la valeur &agrave; Oui enregistrera toutes les adresses emails suppos&eacute;es recevoir une notification dans le fichier var/log/digitalpianism_abandonedcarts.log et n'enverra pas les emails
+Test Email,Email de test
+With dry run set to yes, this email is used to filter the emails supposed to be sent and only send a notification email to the customer with this email address,Avec Test &agrave; Oui, cette adresse email sera utilis&eacute;e pour filter les emails suppos&eacute;s &ecirc;tre envoy&eacute; et seulement envoy&eacute; l'email de notification au client avec cette adresse
+Send Notifications Now,Envoyer les notification maintenant
+Cron Schedule,R&eacute;glage du cron
+Sender Name,Nom de l'exp&eacute;diteur
+Sender Email,Email de l'exp&eacute;diteur
+Email Template for Unaltered Abandoned Carts,Gabarit d'email pour les paniers abandonn&eacute;s non modifi&eacute;s
+Send Abandoned Cart Email After,Envoyer l'email de notification apr&egrave;s
+(days). NB: this only affects unaltered abandoned carts. If products go on sale, the email below is sent on the same day.,(jours). NB: cela affecte seulement les paniers abandonn&eacute;s non modifi&eacute;s. Si un des produits passent en promotion, l'email ci dessous sera envoy&eacute; le même jour.
+Email Template for Sale Products,Gabarit d'email pour les produits en promo
+Customer Groups Restriction,Restriction de groupes clients

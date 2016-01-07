@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <modules>
+        <DigitalPianism_Abandonedcarts>
+            <version>0.3.3</version>
+        </DigitalPianism_Abandonedcarts>
+    </modules>
+	
+	<admin>
+        <routers>
+
+			<adminhtml>
+				<args>
+					<modules>
+						<DigitalPianism_Abandonedcarts before="Mage_Adminhtml">DigitalPianism_Abandonedcarts_Adminhtml</DigitalPianism_Abandonedcarts>
+					</modules>
+				</args>
+			</adminhtml>
+			
+        </routers>
+	</admin>
+	
+	<frontend>
+		<!-- Translation file -->
+		<translate>
+            <modules>
+                <DigitalPianism_Abandonedcarts>
+                    <files>
+                        <default>DigitalPianism_Abandonedcarts.csv</default>
+                    </files>
+                </DigitalPianism_Abandonedcarts>
+            </modules>
+        </translate>
+	</frontend>
+	
+	<adminhtml>
+		<!-- Backend translation file -->
+        <translate>
+            <modules>
+                <DigitalPianism_Abandonedcarts>
+                    <files>
+                        <default>DigitalPianism_Abandonedcarts.csv</default>
+                    </files>
+                </DigitalPianism_Abandonedcarts>
+            </modules>
+        </translate>
+    </adminhtml>
+	
+	<global>
+		<blocks>
+            <abandonedcarts>
+                <class>DigitalPianism_Abandonedcarts_Block</class>
+            </abandonedcarts>
+        </blocks>
+		
+		<helpers>
+            <abandonedcarts>
+                <class>DigitalPianism_Abandonedcarts_Helper</class>
+            </abandonedcarts>
+        </helpers>
+	
+        <models>
+        	<abandonedcarts>
+        		<class>DigitalPianism_Abandonedcarts_Model</class>
+        	</abandonedcarts>
+            <sales_resource>
+                <rewrite>
+                    <quote>DigitalPianism_Abandonedcarts_Model_Sales_Resource_Quote</quote>
+                </rewrite>
+            </sales_resource>
+        </models>
+
+		<template>
+			<email>
+				<abandonedcartsconfig_options_email_template translate="label" module="abandonedcarts">
+					<label>Abandoned Cart Template</label> 
+					<file>digitalpianism/abandonedcarts/sales_abandonedcarts.html</file>
+					<type>html</type>
+				</abandonedcartsconfig_options_email_template>
+				<abandonedcartsconfig_options_email_template_sale translate="label" module="abandonedcarts">
+					<label>Abandoned Cart Sale Template</label> 
+					<file>digitalpianism/abandonedcarts/sales_abandonedcarts_sale.html</file>
+					<type>html</type>
+				</abandonedcartsconfig_options_email_template_sale>
+			</email>
+		</template>
+		
+		<resources>       
+			<abandonedcarts_setup>
+				<setup>
+					<module>DigitalPianism_Abandonedcarts</module>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</abandonedcarts_setup>
+			<abandonedcarts_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</abandonedcarts_write>
+			<abandonedcarts_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</abandonedcarts_read>
+		</resources>
+        
+    </global>
+	
+	<crontab> 
+		<jobs> 
+			<digitalpianism_abandonedcarts_send>
+				<schedule>
+					<config_path>abandonedcartsconfig/options/cron_expr</config_path>
+				</schedule>
+				<run>
+					<model>abandonedcarts/observer::sendAbandonedCartsEmail</model>
+				</run>
+			</digitalpianism_abandonedcarts_send>
+			<digitalpianism_abandonedcarts_sendsale>
+				<schedule>
+					<config_path>abandonedcartsconfig/options/cron_expr</config_path>
+				</schedule>
+				<run>
+					<model>abandonedcarts/observer::sendAbandonedCartsSaleEmail</model>
+				</run>
+			</digitalpianism_abandonedcarts_sendsale>
+		</jobs> 
+	</crontab>
+	
+	<default>
+		<abandonedcartsconfig>
+			<options>
+				<cron_expr>0 1 * * *</cron_expr>
+				<notify_delay>20</notify_delay>
+				<email_template>abandonedcartsconfig_options_email_template</email_template>
+				<email_template_sale>abandonedcartsconfig_options_email_template_sale</email_template_sale>
+				<customer_groups>1,2,3</customer_groups>
+			</options>
+		</abandonedcartsconfig>
+	</default>
+
+</config>

@@ -1,0 +1,9 @@
+app/code/community/DigitalPianism/Abandonedcarts                                             app/code/community/DigitalPianism/Abandonedcarts                                            
+app/design/adminhtml/default/default/template/digitalpianism                                 app/design/adminhtml/default/default/template/digitalpianism                                
+app/etc/modules/DigitalPianism_Abandonedcarts.xml                                            app/etc/modules/DigitalPianism_Abandonedcarts.xml                                           
+app/locale/en_US/DigitalPianism_Abandonedcarts.csv                                           app/locale/en_US/DigitalPianism_Abandonedcarts.csv                                          
+app/locale/en_US/template/email/digitalpianism/abandonedcarts/sales_abandonedcarts.html      app/locale/en_US/template/email/digitalpianism/abandonedcarts/sales_abandonedcarts.html     
+app/locale/en_US/template/email/digitalpianism/abandonedcarts/sales_abandonedcarts_sale.html app/locale/en_US/template/email/digitalpianism/abandonedcarts/sales_abandonedcarts_sale.html
+app/locale/fr_FR/DigitalPianism_Abandonedcarts.csv                                           app/locale/fr_FR/DigitalPianism_Abandonedcarts.csv                                          
+app/locale/fr_FR/template/email/digitalpianism/abandonedcarts/sales_abandonedcarts.html      app/locale/fr_FR/template/email/digitalpianism/abandonedcarts/sales_abandonedcarts.html     
+app/locale/fr_FR/template/email/digitalpianism/abandonedcarts/sales_abandonedcarts_sale.html app/locale/fr_FR/template/email/digitalpianism/abandonedcarts/sales_abandonedcarts_sale.html

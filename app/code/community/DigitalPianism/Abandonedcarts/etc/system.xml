@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+        <digitalpianism translate="label" module="abandonedcarts">
+            <label>Digital Pianism</label>
+            <sort_order>101</sort_order>
+        </digitalpianism>
+    </tabs>
+    <sections>
+		<abandonedcartsconfig translate="label" module="abandonedcarts">
+            <label>Abandoned Carts Emails</label>
+            <tab>digitalpianism</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+				<options translate="label">
+					<label>Abandoned Carts Email</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>110</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<enable translate="label">
+							<label>Enable Abandoned Carts Notification</label>
+							<frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable>
+						<cron_expr translate="label">
+							<label>Cron Schedule</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</cron_expr>
+						<name translate="label">
+							<label>Sender Name</label>
+							<frontend_type>text</frontend_type>
+							<backend_model>adminhtml/system_config_backend_email_sender</backend_model>
+							<validate>validate-emailSender</validate>                            
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</name>
+						<email translate="label">
+							<label>Sender Email</label>
+							<frontend_type>text</frontend_type>
+							<validate>validate-email</validate>
+							<backend_model>adminhtml/system_config_backend_email_address</backend_model>
+							<sort_order>30</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</email>
+						<email_template translate="label">
+							<label>Email Template for Unaltered Abandoned Carts</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_email_template</source_model>
+							<sort_order>40</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</email_template>
+						<notify_delay translate="label comment">
+							<label>Send Abandoned Cart Email After</label>
+							<frontend_type>text</frontend_type>
+							<validate>validate-not-negative-number</validate>
+							<sort_order>50</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>(days). NB: this only affects unaltered abandoned carts. If products go on sale, the email below is sent on the same day.</comment>
+						</notify_delay>
+						<enable_sale translate="label">
+							<label>Enable Sale Abandoned Carts Notification</label>
+							<frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>60</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</enable_sale>
+						<email_template_sale translate="label">
+							<label>Email Template for Sale Products</label>
+							<frontend_type>select</frontend_type>
+							<source_model>adminhtml/system_config_source_email_template</source_model>
+							<sort_order>70</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</email_template_sale>
+						<customer_groups translate="label">
+							<label>Customer Groups Restriction</label>
+							<frontend_type>multiselect</frontend_type>
+							<source_model>adminhtml/system_config_source_customer_group_multiselect</source_model>
+							<sort_order>75</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</customer_groups>
+						<dryrun translate="label comment">
+							<label>Dry Run</label>
+							<frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>80</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Setting this parameter to Yes will log all the email addresses supposed to receive a notification into the var/log/digitalpianism_abandonedcarts.log file and will not send the real email notification</comment>
+						</dryrun>
+						<testemail translate="label comment">
+							<label>Test Email</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>90</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>With dry run set to yes, this email is used to filter the emails supposed to be sent and only send a notification email to the customer with this email address</comment>
+						</testemail>
+						<send translate="label">
+							<label>Send Notifications Now</label>
+							<frontend_type>button</frontend_type>
+							<frontend_model>abandonedcarts/adminhtml_system_config_form_button</frontend_model>
+							<sort_order>100</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</send>
+					</fields>
+				</options>
+			</groups>
+		</abandonedcartsconfig>
+    </sections>
+</config>
