@@ -96,7 +96,7 @@ class DigitalPianism_Abandonedcarts_Model_Observer extends Mage_Core_Model_Abstr
 			$_productCollection->setPageSize(1);
 
 			// Add product image
-			//$emailTemplateVariables['productimage'] = (string)Mage::helper('catalog/image')->init($_productCollection->getFirstItem(), 'image');
+			$emailTemplateVariables['productimage'] = (string)Mage::helper('catalog/image')->init($_productCollection->getFirstItem(), 'image');
 
 			$emailTemplateVariables['extraproductcount'] = 0;
 		}
