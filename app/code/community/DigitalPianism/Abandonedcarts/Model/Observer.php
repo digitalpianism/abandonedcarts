@@ -95,8 +95,15 @@ class DigitalPianism_Abandonedcarts_Model_Observer extends Mage_Core_Model_Abstr
 			// Limit the collection to get the specific product
 			$_productCollection->setPageSize(1);
 
+			try {
+				$productImg = (string)Mage::helper('catalog/image')->init($_productCollection->getFirstItem(), 'image');
+			}
+			catch (Exception $e) {
+				$productImg = false;
+			}
+
 			// Add product image
-			$emailTemplateVariables['productimage'] = (string)Mage::helper('catalog/image')->init($_productCollection->getFirstItem(), 'image');
+			$emailTemplateVariables['productimage'] = $productImg;
 
 			$emailTemplateVariables['extraproductcount'] = 0;
 		}
@@ -172,8 +179,15 @@ class DigitalPianism_Abandonedcarts_Model_Observer extends Mage_Core_Model_Abstr
 				// Limit the collection to get the specific product
 				$_productCollection->setPageSize(1);
 
+				try {
+					$productImg = (string)Mage::helper('catalog/image')->init($_productCollection->getFirstItem(), 'image');
+				}
+				catch (Exception $e) {
+					$productImg = false;
+				}
+
 				// Add product image
-				$emailTemplateVariables['productimage'] = (string)Mage::helper('catalog/image')->init($_productCollection->getFirstItem(), 'image');
+				$emailTemplateVariables['productimage'] = $productImg;
 			}
 			else
 			{
