@@ -14,11 +14,9 @@
                 <td valign="top">
                     <div>
                         <p>Dear {{var firstname}},</p>
-                        <p>You have abandoned the following product in your shopping bag:</p>
-                        <img src="{{var productimage}}" alt="{{var productname}}" />
-                        <p>{{var productname}}</p>
-                        <p>{{depend extraproductcount}} As well as {{var extraproductcount}} more products{{/depend}}.</p>
-                        <p>Follow this link and log in to finalize your purchase: {{config path="web/unsecure/base_url"}}</p>
+                        <p>You have abandoned the following product(s) in your shopping bag:</p>
+                        {{block type='core/template' area='frontend' template='digitalpianism/abandonedcarts/email/items.phtml' productname=$productname productimage=$productimage}}
+                        <p>Follow this link and log in to finalize your purchase: <a href="{{var link}}">{{var link}}</a></p>
 					</div>
 				</td>
 			</tr>

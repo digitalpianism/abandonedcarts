@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_abandonedcarts_grid>
+        <block type="abandonedcarts/adminhtml_abandonedcarts_grid" name="root" output="toHtml"/>
+    </adminhtml_abandonedcarts_grid>
+
+    <adminhtml_abandonedcarts_salegrid>
+        <block type="abandonedcarts/adminhtml_saleabandonedcarts_grid" name="root" output="toHtml"/>
+    </adminhtml_abandonedcarts_salegrid>
+</layout>

@@ -4,7 +4,7 @@
 
     <modules>
         <DigitalPianism_Abandonedcarts>
-            <version>0.3.6</version>
+            <version>1.0.0</version>
         </DigitalPianism_Abandonedcarts>
     </modules>
 	
@@ -33,6 +33,20 @@
                 </DigitalPianism_Abandonedcarts>
             </modules>
         </translate>
+
+		<secure_url>
+			<abandonedcarts>/abandonedcarts/</abandonedcarts>
+		</secure_url>
+
+		<routers>
+			<abandonedcarts>
+				<use>standard</use>
+				<args>
+					<module>DigitalPianism_Abandonedcarts</module>
+					<frontName>abandonedcarts</frontName>
+				</args>
+			</abandonedcarts>
+		</routers>
 	</frontend>
 	
 	<adminhtml>
@@ -46,6 +60,46 @@
                 </DigitalPianism_Abandonedcarts>
             </modules>
         </translate>
+
+		<layout>
+			<updates>
+				<abandonedcarts module="DigitalPianism_Abandonedcarts">
+					<file>digitalpianism/abandonedcarts.xml</file>
+				</abandonedcarts>
+			</updates>
+		</layout>
+
+		<events>
+			<!-- To register the controller action -->
+			<controller_action_predispatch_adminhtml>
+				<observers>
+					<digitalpianism_abandonedcarts_predispatch_register>
+						<type>singleton</type>
+						<class>abandonedcarts/adminhtml_observer</class>
+						<method>registerController</method>
+					</digitalpianism_abandonedcarts_predispatch_register>
+				</observers>
+			</controller_action_predispatch_adminhtml>
+			<!-- Called after creating a block -->
+			<core_layout_block_create_after>
+				<observers>
+					<digitalpianism_abandonedcarts_block_create_after>
+						<type>singleton</type>
+						<class>abandonedcarts/adminhtml_observer</class>
+						<method>addExtraColumnsToGrid</method>
+					</digitalpianism_abandonedcarts_block_create_after>
+				</observers>
+			</core_layout_block_create_after>
+			<!-- Called before loading a non EAV collection -->
+			<core_collection_abstract_load_before>
+				<observers>
+					<digitalpianism_abandonedcarts_before_core_load_collection>
+						<class>abandonedcarts/adminhtml_observer</class>
+						<method>addExtraColumnsToCollection</method>
+					</digitalpianism_abandonedcarts_before_core_load_collection>
+				</observers>
+			</core_collection_abstract_load_before>
+		</events>
     </adminhtml>
 	
 	<global>
@@ -64,7 +118,22 @@
         <models>
         	<abandonedcarts>
         		<class>DigitalPianism_Abandonedcarts_Model</class>
+				<resourceModel>abandonedcarts_mysql4</resourceModel>
         	</abandonedcarts>
+
+			<abandonedcarts_mysql4>
+				<class>DigitalPianism_Abandonedcarts_Model_Resource</class>
+				<!-- declare table test -->
+				<entities>
+					<log>
+						<table>dp_abandonedcarts_log</table>
+					</log>
+					<link>
+						<table>dp_abandonedcarts_link</table>
+					</link>
+				</entities>
+			</abandonedcarts_mysql4>
+
             <sales_resource>
                 <rewrite>
                     <quote>DigitalPianism_Abandonedcarts_Model_Sales_Resource_Quote</quote>
@@ -117,7 +186,7 @@
 					<config_path>abandonedcartsconfig/options/cron_expr</config_path>
 				</schedule>
 				<run>
-					<model>abandonedcarts/observer::sendAbandonedCartsEmail</model>
+					<model>abandonedcarts/notifier::sendAbandonedCartsEmail</model>
 				</run>
 			</digitalpianism_abandonedcarts_send>
 			<digitalpianism_abandonedcarts_sendsale>
@@ -125,21 +194,41 @@
 					<config_path>abandonedcartsconfig/options/cron_expr</config_path>
 				</schedule>
 				<run>
-					<model>abandonedcarts/observer::sendAbandonedCartsSaleEmail</model>
+					<model>abandonedcarts/notifier::sendAbandonedCartsSaleEmail</model>
 				</run>
 			</digitalpianism_abandonedcarts_sendsale>
+			<digitalpianism_abandonedcarts_deleteexpiredlinks>
+				<schedule>
+					<cron_expr>*/5 * * * *</cron_expr>
+				</schedule>
+				<run>
+					<model>abandonedcarts/link_cleaner::cleanExpiredLinks</model>
+				</run>
+			</digitalpianism_abandonedcarts_deleteexpiredlinks>
 		</jobs> 
 	</crontab>
 	
 	<default>
 		<abandonedcartsconfig>
 			<options>
+				<enable>0</enable>
 				<cron_expr>0 1 * * *</cron_expr>
 				<notify_delay>20</notify_delay>
-				<email_template>abandonedcartsconfig_options_email_template</email_template>
-				<email_template_sale>abandonedcartsconfig_options_email_template_sale</email_template_sale>
+				<enable_sale>1</enable_sale>
 				<customer_groups>1,2,3</customer_groups>
 			</options>
+			<email>
+				<email_template>abandonedcartsconfig_options_email_template</email_template>
+				<email_template_sale>abandonedcartsconfig_options_email_template_sale</email_template_sale>
+				<autologin>0</autologin>
+			</email>
+			<campaign>
+				<enable>0</enable>
+			</campaign>
+			<test>
+				<dryrun>0</dryrun>
+				<log>0</log>
+			</test>
 		</abandonedcartsconfig>
 	</default>
 

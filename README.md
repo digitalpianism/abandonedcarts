@@ -12,6 +12,16 @@ http://www.magentocommerce.com/magento-connect/abandoned-carts-notifications.htm
 
 # Release Notes
 
+## 1.0.0
+- Full refactor of the module
+- Add two grids to the backend to see the abandoned carts
+- Add a log database table to easily see what's going on
+- Implement an autologin link system
+- Implement Google Campaign tags
+- Improve the templates to list all items
+- Change the way dryrun and test email behaves
+- Add notification flags columns to the native abandoned carts report
+
 ## 0.3.6
 - Fix a bug where an error would be logged if the product image was missing
 

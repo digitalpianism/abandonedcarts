@@ -1,0 +1,40 @@
+<?php
+$productNames = $this->getProductname();
+$productImages = $this->getProductimage();
+$cartPrices = $this->getCartprice();
+$salePrices = $this->getSpecialprice();
+?>
+<table>
+    <tr>
+        <th>
+            <?php echo Mage::helper('abandonedcarts')->__('Product Image'); ?>
+        </th>
+        <th>
+            <?php echo Mage::helper('abandonedcarts')->__('Product Name'); ?>
+        </th>
+        <th>
+            <?php echo Mage::helper('abandonedcarts')->__('Price when you left'); ?>
+        </th>
+        <th>
+            <?php echo Mage::helper('abandonedcarts')->__('Price now'); ?>
+        </th>
+    </tr>
+    <?php foreach($productNames as $i => $name): ?>
+        <tr>
+            <td>
+                <?php if ($productImages[$i]): ?>
+                    <img src="<?php echo $productImages[$i]; ?>" alt="<?php echo $name; ?>" />
+                <?php endif; ?>
+            </td>
+            <td>
+                <?php echo $name; ?>
+            </td>
+            <td>
+                <?php echo $cartPrices[$i]; ?>
+            </td>
+            <td>
+                <?php echo $salePrices[$i]; ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+</table>

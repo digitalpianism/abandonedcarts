@@ -1,5 +1,39 @@
 <?xml version="1.0"?>
 <config>
+	<menu>
+		<digitalpianism_menu translate="title">
+			<title>Digital Pianism</title>
+			<sort_order>110</sort_order>
+			<children>
+				<abandonedcarts translate="title" module="abandonedcarts">
+					<title>Abandoned Carts</title>
+					<sort_order>1</sort_order>
+					<children>
+						<logs translate="title" module="abandonedcarts">
+							<title>Logs</title>
+							<sort_order>1</sort_order>
+							<action>adminhtml/abandonedcarts/logs</action>
+						</logs>
+						<list translate="title" module="abandonedcarts">
+							<title>Abandoned Carts List</title>
+							<sort_order>2</sort_order>
+							<action>adminhtml/abandonedcarts/index</action>
+						</list>
+						<sale_list translate="title" module="abandonedcarts">
+							<title>Abandoned Carts Sale List</title>
+							<sort_order>3</sort_order>
+							<action>adminhtml/abandonedcarts/sale</action>
+						</sale_list>
+						<config translate="title" module="abandonedcarts">
+							<title>Configuration</title>
+							<sort_order>4</sort_order>
+							<action>adminhtml/system_config/edit/section/abandonedcartsconfig</action>
+						</config>
+					</children>
+				</abandonedcarts>
+			</children>
+		</digitalpianism_menu>
+	</menu>
 	<acl>
 		<resources>
 			<all>
@@ -7,6 +41,32 @@
 			</all>
 			<admin>
 				<children>
+					<digitalpianism_menu>
+						<children>
+							<abandonedcarts translate="title">
+								<title>Abandoned Carts</title>
+								<sort_order>1</sort_order>
+								<children>
+									<logs translate="title">
+										<title>Logs</title>
+										<sort_order>1</sort_order>
+									</logs>
+									<list translate="title" module="abandonedcarts">
+										<title>Abandoned Carts List</title>
+										<sort_order>2</sort_order>
+									</list>
+									<sale_list translate="title" module="abandonedcarts">
+										<title>Abandoned Carts Sale List</title>
+										<sort_order>3</sort_order>
+									</sale_list>
+									<config translate="title">
+										<title>Configuration</title>
+										<sort_order>4</sort_order>
+									</config>
+								</children>
+							</abandonedcarts>
+						</children>
+					</digitalpianism_menu>
 					<system>
 						<children>
 							<config>

@@ -12,18 +12,11 @@
             <!-- [ middle starts here] -->
             <tr>
                 <td valign="top">
-                    <p style="font-size:12px; line-height:16px; margin:0;">
-						Ch&egrave;r(e) {{var firstname}},<br />
-						Vous avez abandonn&eacute; un(e) {{var productname}} dans votre panier.<br/>
-						
-						Son prix &eacute;tait de {{var cartprice}} et est maintenant de {{var specialprice}}.<br/>
-						
-						{{depend extraproductcount}}
-						Achetez les {{var extraproductcount}} autre produits en promotion dans votre panier et &eacute;conomisez {{var discount}} sur votre commande.<br/>
-						{{/depend}}
-						
-						Suivez ce lien et connectez vous pour finaliser votre achat en profitant des promotions: {{config path="web/unsecure/base_url"}}
-					</p>
+					<p>Ch&egrave;r(e) {{var firstname}},</p>
+					<p>Vous avez abandonn&eacute; le(s) produit(s) suivant(s) dans votre panier et ils sont d&eacute;sormais en promotion.</p>
+					{{block type='core/template' area='frontend' template='digitalpianism/abandonedcarts/email/sale_items.phtml' productname=$productname productimage=$productimage cartprice=$cartprice specialprice=$specialprice}}
+					<p>Acheter les produits dans votre panier et &eacute;conomisez {{var discount}} sur votre commande.</p>
+					<p>Suivez ce lien et connectez vous pour finaliser votre achat en profitant des promotions: <a href="{{var link}}">{{var link}}</a></p>
 				</td>
 			</tr>
 		</table>

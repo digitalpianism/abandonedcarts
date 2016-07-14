@@ -14,16 +14,10 @@
                 <td valign="top">
                     <div>
                         <p>Dear {{var firstname}},</p>
-                        <p>You have abandoned the following product in your shopping bag:</p>
-                        <img src="{{var productimage}}" alt="{{var productname}}" />
-                        <p>{{var productname}}</p>
-						<p>It was {{var cartprice}} and now is {{var specialprice}}.</p>
-						<p>
-						{{depend extraproductcount}}
-						Purchase the {{var extraproductcount}} other sale products in your cart and save {{var discount}} on your order.
-						{{/depend}}
-                        </p>
-						<p>Follow this link and log in to finalize your purchase with the new special price: {{config path="web/unsecure/base_url"}}</p>
+                        <p>You have abandoned the following product(s) in your shopping bag and they are now on sale:</p>
+                        {{block type='core/template' area='frontend' template='digitalpianism/abandonedcarts/email/sale_items.phtml' productname=$productname productimage=$productimage cartprice=$cartprice specialprice=$specialprice}}
+                        <p>Purchase every product in your cart and save {{var discount}} on your order.</p>
+                        <p>Follow this link to finalize your purchase with the new special price: <a href="{{var link}}">{{var link}}</a></p>
 					</div>
 				</td>
 			</tr>
