@@ -17,7 +17,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts extends Mage_
         $this->_removeButton('add');
         $this->_addButton('notify', array(
             'label'     => Mage::helper('abandonedcarts')->__('Send notifications'),
-            'onclick'   => "setLocation('".$this->getUrl('*/*/notifyAll')."')",
+            'onclick'   => "setLocation('".$this->getUrl('*/*/notifyAll', array('store'  =>  $this->getRequest()->getParam('store', 0)))."')",
         ));
         $this->setTemplate('digitalpianism/abandonedcarts/list.phtml');
     }

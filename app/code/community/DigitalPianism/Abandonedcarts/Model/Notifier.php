@@ -152,9 +152,9 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 			$token = "";
 			// Autologin only applies to real customer (skip not logged in customer group)
 			if (Mage::helper('abandonedcarts')->isAutologin()) {
-				$token = $this->_generateToken($args['row']['customer_email']);
+				$token = urlencode($this->_generateToken($args['row']['customer_email']));
 			}
-			$emailTemplateVariables['link']	= $this->_generateUrl($token);
+			$emailTemplateVariables['link']	= $this->_generateUrl($token, $this->_currentStoreId);
 		} else {
 			// We create some extra variables if there is several products in the cart
 			$emailTemplateVariables = $this->_recipients[$args['row']['customer_email']]['emailTemplateVariables'];
@@ -233,9 +233,9 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 				$token = "";
 				// Autologin only applies to real customer (skip not logged in customer group)
 				if (Mage::helper('abandonedcarts')->isAutologin()) {
-					$token = $this->_generateToken($args['row']['customer_email']);
+					$token = urlencode($this->_generateToken($args['row']['customer_email']));
 				}
-				$emailTemplateVariables['link']	= $this->_generateUrl($token);
+				$emailTemplateVariables['link']	= $this->_generateUrl($token, $this->_currentStoreId);
 
 				// If one product before
 				$emailTemplateVariables['discount'] = number_format(floatval($args['row']['product_price_in_cart']),2) - number_format(floatval($args['row']['product_special_price']),2);
@@ -590,19 +590,23 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 	/**
 	 * @return mixed|string
 	 */
-	protected function _generateUrl($token = "")
+	protected function _generateUrl($token = "", $storeId = 0)
 	{
 		if (!Mage::helper('abandonedcarts')->isCampaignEnabled()) {
 			return Mage::getUrl('abandonedcarts',
 				array(
-					'_query'	=>	($token ? "?token=" . $token : ''),
+					'_store'	=>	$storeId,
+					'_nosid'	=>	true,
+					'_query'	=>	($token ? "token=" . $token : ''),
 					'_secure'	=>	true
 				)
 			);
 		}
 
 		return Mage::getUrl('abandonedcarts', array(
-				'_query'		=>	"?utm_source=" . self::CAMPAIGN_SOURCE . "&utm_medium=" . self::CAMPAIGN_MEDIUM . "&utm_campaign=" . Mage::helper('abandonedcarts')->getCampaignName() . ($token ? "&token=" . $token : ''),
+				'_store'		=>	$storeId,
+				'_nosid'		=>	true,
+				'_query'		=>	"utm_source=" . self::CAMPAIGN_SOURCE . "&utm_medium=" . self::CAMPAIGN_MEDIUM . "&utm_campaign=" . Mage::helper('abandonedcarts')->getCampaignName() . ($token ? "&token=" . $token : ''),
 				'_secure'		=>	true
 			)
 		);

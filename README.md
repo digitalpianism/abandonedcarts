@@ -12,6 +12,13 @@ http://www.magentocommerce.com/magento-connect/abandoned-carts-notifications.htm
 
 # Release Notes
 
+## 1.0.2
+- Fix a bug where the admin URL would be used when notifying from the backend
+- Fix a bug where admin users store would not remain on a multistore install
+
+## 1.0.1
+- Fix a bug where the data script would never run
+
 ## 1.0.0
 - Full refactor of the module
 - Add two grids to the backend to see the abandoned carts

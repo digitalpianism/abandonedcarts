@@ -148,7 +148,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Saleabandonedcarts_Grid exte
 
         $this->getMassactionBlock()->addItem('notifySale', array(
             'label' => Mage::helper('abandonedcarts')->__('Send notification'),
-            'url' => $this->getUrl('*/*/notifySale')
+            'url' => $this->getUrl('*/*/notifySale', array('store'  =>  $this->getRequest()->getParam('store', 0)))
         ));
 
         return $this;
@@ -180,7 +180,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Saleabandonedcarts_Grid exte
      */
     public function getGridUrl()
     {
-        return $this->getUrl('*/*/salegrid', array('current' => true));
+        return $this->getUrl('*/*/salegrid', array('current' => true, 'store'  =>  $this->getRequest()->getParam('store', 0)));
     }
 
     /**
