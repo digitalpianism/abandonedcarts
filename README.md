@@ -12,6 +12,9 @@ http://www.magentocommerce.com/magento-connect/abandoned-carts-notifications.htm
 
 # Release Notes
 
+## 1.0.3
+- Fix a bug where it was impossible to preview the email templates in the backend
+
 ## 1.0.2
 - Fix a bug where the admin URL would be used when notifying from the backend
 - Fix a bug where admin users store would not remain on a multistore install

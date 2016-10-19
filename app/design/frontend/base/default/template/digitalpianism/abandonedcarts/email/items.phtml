@@ -2,25 +2,27 @@
 $productNames = $this->getProductname();
 $productImages = $this->getProductimage();
 ?>
-<table>
-    <tr>
-        <th>
-            <?php echo Mage::helper('abandonedcarts')->__('Product Image'); ?>
-        </th>
-        <th>
-            <?php echo Mage::helper('abandonedcarts')->__('Product Name'); ?>
-        </th>
-    </tr>
-    <?php foreach($productNames as $i => $name): ?>
+<?php if ($productNames): ?>
+    <table>
         <tr>
-            <td>
-                <?php if ($productImages[$i]): ?>
-                    <img src="<?php echo $productImages[$i]; ?>" alt="<?php echo $name; ?>" />
-                <?php endif; ?>
-            </td>
-            <td>
-                <?php echo $name; ?>
-            </td>
+            <th>
+                <?php echo Mage::helper('abandonedcarts')->__('Product Image'); ?>
+            </th>
+            <th>
+                <?php echo Mage::helper('abandonedcarts')->__('Product Name'); ?>
+            </th>
         </tr>
-    <?php endforeach; ?>
-</table>
+        <?php foreach($productNames as $i => $name): ?>
+            <tr>
+                <td>
+                    <?php if ($productImages[$i]): ?>
+                        <img src="<?php echo $productImages[$i]; ?>" alt="<?php echo $name; ?>" />
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php echo $name; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>
