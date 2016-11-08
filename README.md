@@ -12,6 +12,9 @@ http://www.magentocommerce.com/magento-connect/abandoned-carts-notifications.htm
 
 # Release Notes
 
+## 1.0.4
+- Fix a bug where the default email template would not be picked: https://github.com/digitalpianism/abandonedcarts/issues/4
+
 ## 1.0.3
 - Fix a bug where it was impossible to preview the email templates in the backend
 
