@@ -41,6 +41,11 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 	/**
 	 * @var
 	 */
+	protected $_originalArea;
+
+	/**
+	 * @var
+	 */
 	protected $_originalStoreId;
 
 	/**
@@ -106,9 +111,9 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 		// Get product image via collection
 		$_productCollection = Mage::getResourceModel('catalog/product_collection');
 		// Add attributes to the collection
-        $_productCollection->addAttributeToSelect('small_image');
 		$_productCollection->addAttributeToFilter('entity_id',array('eq' => $productId));
-		
+		// Add image to the collection
+		$_productCollection->addAttributeToSelect('small_image');
 		// Limit the collection to get the specific product
 		$_productCollection->setPageSize(1);
 
@@ -273,6 +278,12 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 
 			// Store Id
 			Mage::app()->setCurrentStore($recipient['store_id']);
+			// Area
+			if ($recipient['store_id'] === 0) {
+				Mage::app()->getDesign()->setArea('adminhtml');
+			} else {
+				Mage::app()->getDesign()->setArea('frontend');
+			}
 			// Get the transactional email template
 			$templateId = Mage::getStoreConfig('abandonedcartsconfig/email/email_template_sale');
 			// Get the sender
@@ -360,6 +371,13 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 
 			// Store ID
 			Mage::app()->setCurrentStore($recipient['store_id']);
+			// Area
+			if ($recipient['store_id'] === 0) {
+				Mage::app()->getDesign()->setArea('adminhtml');
+			} else {
+				Mage::app()->getDesign()->setArea('frontend');
+			}
+			
 			// Get the transactional email template
 			$templateId = Mage::getStoreConfig('abandonedcartsconfig/email/email_template');
 			// Get the sender
@@ -449,6 +467,8 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 		$this->_customerGroups = $this->_customerGroups ? $this->_customerGroups : Mage::helper('abandonedcarts')->getCustomerGroupsLimitation();
 		// Original store id
 		$this->_originalStoreId = Mage::app()->getStore()->getId();
+		// Original area
+		$this->_originalArea = Mage::app()->getDesign()->getArea();
 		try
 		{
 			if (Mage::helper('abandonedcarts')->isSaleEnabled()) {
@@ -489,12 +509,14 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 				}
 				$this->_sendSaleEmails($dryrun, $testemail);
 			}
+			Mage::app()->getDesign()->setArea($this->_originalArea);
 			Mage::app()->setCurrentStore($this->_originalStoreId);
 
 			return count($this->_getSaleRecipients());
 		}
 		catch (Exception $e)
 		{
+			Mage::app()->getDesign()->setArea($this->_originalArea);
 			Mage::app()->setCurrentStore($this->_originalStoreId);
 			Mage::helper('abandonedcarts')->log(sprintf("%s->Error: %s", __METHOD__, $e->getMessage()));
 			return 0;
@@ -522,6 +544,8 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 		$this->_customerGroups = $this->_customerGroups ? $this->_customerGroups : Mage::helper('abandonedcarts')->getCustomerGroupsLimitation();
 		// Original store id
 		$this->_originalStoreId = Mage::app()->getStore()->getId();
+		// Original area
+		$this->_originalArea = Mage::app()->getDesign()->getArea();
 		try
 		{
 			if (Mage::helper('abandonedcarts')->isEnabled()) {
@@ -575,12 +599,14 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 				// Send the emails
 				$this->_sendEmails($dryrun, $testemail);
 			}
+			Mage::app()->getDesign()->setArea($this->_originalArea);
 			Mage::app()->setCurrentStore($this->_originalStoreId);
 
 			return count($this->_getRecipients());
 		}
 		catch (Exception $e)
 		{
+			Mage::app()->getDesign()->setArea($this->_originalArea);
 			Mage::app()->setCurrentStore($this->_originalStoreId);
 			Mage::helper('abandonedcarts')->log(sprintf("%s->Error: %s", __METHOD__, $e->getMessage()));
 			return 0;
