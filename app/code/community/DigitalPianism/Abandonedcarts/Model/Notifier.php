@@ -377,10 +377,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 			} else {
 				Mage::app()->getDesign()->setArea('frontend');
 			}
-
-			if ($recipient['store_id']) {
-				Mage::app()->set
-			}
+			
 			// Get the transactional email template
 			$templateId = Mage::getStoreConfig('abandonedcartsconfig/email/email_template');
 			// Get the sender
