@@ -103,17 +103,9 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 
 	protected function _getProductImage($productId)
 	{
-		// Get product image via collection
-		$_productCollection = Mage::getResourceModel('catalog/product_collection');
-		// Add attributes to the collection
-		$_productCollection->addAttributeToFilter('entity_id',array('eq' => $productId));
-		// Add image to the collection
-		$_productCollection->joinAttribute('small_image', 'catalog_product/image', 'entity_id', null, 'left');
-		// Limit the collection to get the specific product
-		$_productCollection->setPageSize(1);
-
 		try {
-			$productImg = (string)Mage::helper('catalog/image')->init($_productCollection->getFirstItem(), 'small_image')->resize(self::IMAGE_SIZE);
+            $_product = Mage::getModel('catalog/product')->load($productId);
+            $productImg = (string) Mage::helper('catalog/image')->init($_product, 'small_image')->resize(self::IMAGE_SIZE);
 		} catch (Exception $e) {
 			$productImg = false;
 		}
