@@ -204,7 +204,14 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
     {
         $field = $column->getFilterIndex() ? $column->getFilterIndex() : $column->getIndex();
         $value = $column->getFilter()->getValue();
-        $collection->getSelect()->where("$field > '" . $value['from']->toString('Y-MM-dd HH:mm:ss') . "' AND $field < '" . $value['to']->toString('Y-MM-dd HH:mm:ss') . "'");
+        
+        if (!empty($value['from'])) {
+            $collection->getSelect()->where("$field > '" . $value['from']->toString('Y-MM-dd HH:mm:ss')."'");
+        } 
+        
+        if (!empty($value['to'])) {
+            $collection->getSelect()->where("$field < '" . $value['to']->toString('Y-MM-dd HH:mm:ss')."'");
+        }
     }
 
 }
