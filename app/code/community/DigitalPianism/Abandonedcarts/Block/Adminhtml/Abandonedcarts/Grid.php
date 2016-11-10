@@ -209,7 +209,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
             $collection->getSelect()->where("$field > '" . $value['from']->toString('Y-MM-dd HH:mm:ss')."'");
         } 
         
-        If (!empty($value['to'])) {
+        if (!empty($value['to'])) {
             $collection->getSelect()->where("$field < '" . $value['to']->toString('Y-MM-dd HH:mm:ss')."'");
         }
     }
