@@ -135,10 +135,16 @@
 			</abandonedcarts_mysql4>
 
 			<sales_resource>
-				<rewrite>
-					<quote>DigitalPianism_Abandonedcarts_Model_Sales_Resource_Quote</quote>
-				</rewrite>
+                            <rewrite>
+                                <quote>DigitalPianism_Abandonedcarts_Model_Sales_Resource_Quote</quote>
+                            </rewrite>
 			</sales_resource>
+                        
+                        <catalog_resource>
+                            <rewrite>
+                                <product_collection>DigitalPianism_Abandonedcarts_Model_Resource_Product_Collection</product_collection>
+                            </rewrite>
+                        </catalog_resource>
 		</models>
 
 		<template>
