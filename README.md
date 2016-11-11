@@ -14,6 +14,7 @@ http://www.magentocommerce.com/magento-connect/abandoned-carts-notifications.htm
 
 ## 1.0.6
 - Fix a bug where an error would be triggered when filtering the grid by one date (from OR to) : https://github.com/digitalpianism/abandonedcarts/issues/9
+- Fix a bug where the count in the grid would be wrong: https://github.com/digitalpianism/abandonedcarts/issues/11
 
 ## 1.0.5
 - Fix a bug where the small image would not be picked: https://github.com/digitalpianism/abandonedcarts/issues/3

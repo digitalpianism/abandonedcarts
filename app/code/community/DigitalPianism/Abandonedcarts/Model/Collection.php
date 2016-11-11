@@ -15,7 +15,7 @@ class DigitalPianism_Abandonedcarts_Model_Collection {
     public function getCollection($delay, $storeId, $websiteId, $emails = array())
     {
         // Get the product collection
-        $collection = Mage::getResourceModel('catalog/product_collection')->setStore($storeId);
+        $collection = Mage::getResourceModel('abandonedcarts/catalog_product_collection')->setStore($storeId);
 
         // Get the attribute id for the status attribute
         $eavAttribute = Mage::getModel('eav/entity_attribute');
@@ -135,7 +135,7 @@ class DigitalPianism_Abandonedcarts_Model_Collection {
     public function getSalesCollection($storeId, $websiteId, $emails = array())
     {
         // Get the product collection
-        $collection = Mage::getResourceModel('catalog/product_collection')->setStore($storeId);
+        $collection = Mage::getResourceModel('abandonedcarts/catalog_product_collection')->setStore($storeId);
 
         // Get the attribute id for the status attribute
         $eavAttribute = Mage::getModel('eav/entity_attribute');
