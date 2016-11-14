@@ -115,6 +115,8 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Saleabandonedcarts_Grid exte
         $this->addColumn('product_prices', array(
             'header' => Mage::helper('abandonedcarts')->__('Cart Regular Total'),
             'index' => 'product_prices',
+            'type'      => 'price',
+            'currency_code'  => $currencyCode,
             'filter'    => false
         ));
 
