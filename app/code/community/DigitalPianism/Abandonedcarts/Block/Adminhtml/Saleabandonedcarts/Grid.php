@@ -58,7 +58,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Saleabandonedcarts_Grid exte
                 )
             );
 
-            $collection->getSelect()->having("SUM(quote_items.price) < SUM(IFNULL(catalog_flat.special_price,quote_items.price))");
+            $collection->getSelect()->having("SUM(quote_items.price) > SUM(IFNULL(catalog_flat.special_price,quote_items.price))");
         } else {
             $collection->getSelect()->columns(
                 array(
