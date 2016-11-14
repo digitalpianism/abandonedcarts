@@ -75,6 +75,8 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
 
     protected function _prepareColumns()
     {
+        $currencyCode = Mage::app()->getStore()->getCurrentCurrencyCode();
+        
         $this->addColumn('customer_email', array(
             'header' => Mage::helper('abandonedcarts')->__('Customer Email'),
             'index' => 'customer_email',
@@ -111,6 +113,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
             'header' => Mage::helper('abandonedcarts')->__('Cart Total'),
             'index' => 'product_prices',
             'type'      => 'price',
+            'currency_code'  => $currencyCode,
             'filter'    => false
         ));
 
