@@ -110,6 +110,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
         $this->addColumn('product_prices', array(
             'header' => Mage::helper('abandonedcarts')->__('Cart Total'),
             'index' => 'product_prices',
+            'type'      => 'price',
             'filter'    => false
         ));
 

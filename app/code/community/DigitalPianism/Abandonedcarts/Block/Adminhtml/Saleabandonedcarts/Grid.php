@@ -119,6 +119,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Saleabandonedcarts_Grid exte
         $this->addColumn('product_special_prices', array(
             'header' => Mage::helper('abandonedcarts')->__('Cart Sale Total'),
             'index' => 'product_special_prices',
+            'type'      => 'price',
             'filter'    =>  false
         ));
 
