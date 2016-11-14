@@ -55,7 +55,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
                 array(
                     'product_ids'   =>  'GROUP_CONCAT(e.entity_id)',
                     'product_names'   =>  'GROUP_CONCAT(catalog_flat.name)',
-                    'product_prices'   =>  'SUM(catalog_flat.price)'
+                    'product_prices'   =>  'SUM(catalog_flat.price * quote_items.qty)'
                 )
             );
         } else {
@@ -63,7 +63,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
                 array(
                     'product_ids'   =>  'GROUP_CONCAT(e.entity_id)',
                     'product_names'   =>  'GROUP_CONCAT(catalog_name.value)',
-                    'product_prices'   =>  'SUM(catalog_price.value)'
+                    'product_prices'   =>  'SUM(catalog_price.value * quote_items.qty)'
                 )
             );
         }
