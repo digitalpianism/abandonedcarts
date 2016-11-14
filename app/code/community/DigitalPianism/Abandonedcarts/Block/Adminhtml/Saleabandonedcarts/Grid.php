@@ -53,8 +53,8 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Saleabandonedcarts_Grid exte
                 array(
                     'product_ids'   =>  'GROUP_CONCAT(e.entity_id)',
                     'product_names'   =>  'GROUP_CONCAT(catalog_flat.name)',
-                    'product_prices'   =>  'SUM(quote_items.price)',
-                    'product_special_prices'   =>  'SUM(IFNULL(catalog_flat.special_price,quote_items.price))',
+                    'product_prices'   =>  'SUM(catalog_flat.price * quote_items.qty)',
+                    'product_special_prices'   =>  'SUM(IFNULL(catalog_flat.special_price,quote_items.price) * quote_items.qty)',
                 )
             );
 
@@ -64,8 +64,8 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Saleabandonedcarts_Grid exte
                 array(
                     'product_ids'   =>  'GROUP_CONCAT(e.entity_id)',
                     'product_names'   =>  'GROUP_CONCAT(catalog_name.value)',
-                    'product_prices'   =>  'SUM(quote_items.price)',
-                    'product_special_prices'   =>  'SUM(IFNULL(catalog_sprice.value,quote_items.price))',
+                    'product_prices'   =>  'SUM(catalog_price.value * quote_items.qty)',
+                    'product_special_prices'   =>  'SUM(IFNULL(catalog_sprice.value,quote_items.price) * quote_items.qty)',
                 )
             );
 
