@@ -96,7 +96,7 @@ class DigitalPianism_Abandonedcarts_Adminhtml_AbandonedcartsController extends M
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('abandonedcarts')->__('Please select email(s)'));
         } else {
             try {
-                Mage::getModel('abandonedcarts/notifier')->sendAbandonedCartsSaleEmail(false, false, $emails);
+                Mage::getModel('abandonedcarts/notifier')->sendAbandonedCartsSaleEmail(null, false, false, $emails);
                 Mage::getSingleton('adminhtml/session')->addSuccess(
                     Mage::helper('abandonedcarts')->__(
                         '%sTotal of %d customer(s) were successfully notified', (Mage::helper('abandonedcarts')->getDryRun() ? "!DRY RUN! " : ""), count($emails)
@@ -119,7 +119,7 @@ class DigitalPianism_Abandonedcarts_Adminhtml_AbandonedcartsController extends M
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('abandonedcarts')->__('Please select email(s)'));
         } else {
             try {
-                Mage::getModel('abandonedcarts/notifier')->sendAbandonedCartsEmail(false, false, null, $emails);
+                Mage::getModel('abandonedcarts/notifier')->sendAbandonedCartsEmail(null, false, false, null, $emails);
                 Mage::getSingleton('adminhtml/session')->addSuccess(
                     Mage::helper('abandonedcarts')->__(
                         '%sTotal of %d customer(s) were successfully notified', (Mage::helper('abandonedcarts')->getDryRun() ? "!DRY RUN! " : ""), count($emails)

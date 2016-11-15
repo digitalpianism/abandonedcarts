@@ -453,7 +453,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 	 * @param boolean
 	 * @param string
 	 */
-	public function sendAbandonedCartsSaleEmail($dryrun = false, $testemail = null, $emails = array())
+	public function sendAbandonedCartsSaleEmail(Mage_Cron_Model_Schedule $schedule = null, $dryrun = false, $testemail = null, $emails = array())
 	{
 		if (Mage::helper('abandonedcarts')->getDryRun()) {
 			$dryrun = true;
@@ -530,7 +530,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 	 * @param string $testemail
 	 * @internal param if $boolean dryrun is set to true, it won't send emails and won't alter quotes
 	 */
-	public function sendAbandonedCartsEmail($nodate = false, $dryrun = false, $testemail = null, $emails = array())
+	public function sendAbandonedCartsEmail(Mage_Cron_Model_Schedule $schedule = null, $nodate = false, $dryrun = false, $testemail = null, $emails = array())
 	{
 		if (Mage::helper('abandonedcarts')->getDryRun()) {
 			$dryrun = true;

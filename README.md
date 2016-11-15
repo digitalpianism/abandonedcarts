@@ -12,6 +12,15 @@ http://www.magentocommerce.com/magento-connect/abandoned-carts-notifications.htm
 
 # Release Notes
 
+## 1.0.7
+Thanks to Septoctobre for all the bug reports and pull requests
+
+- Fix a bug where the delay would not be taken into consideration when the cron ran: https://github.com/digitalpianism/abandonedcarts/issues/17
+- Fix a bug where the area would not be properly loaded: https://github.com/digitalpianism/abandonedcarts/issues/8 and https://github.com/digitalpianism/abandonedcarts/issues/7
+- Fix a bug where the count of total would be wrong because of the quantity : https://github.com/digitalpianism/abandonedcarts/issues/13
+- Implement prices columns with currencies : https://github.com/digitalpianism/abandonedcarts/issues/13
+- Fix a bug where the sale abandoned carts report would display nothing when flat catalog is enabled : https://github.com/digitalpianism/abandonedcarts/issues/15
+
 ## 1.0.6
 - Fix a bug where an error would be triggered when filtering the grid by one date (from OR to) : https://github.com/digitalpianism/abandonedcarts/issues/9
 - Fix a bug where the count in the grid would be wrong: https://github.com/digitalpianism/abandonedcarts/issues/11
