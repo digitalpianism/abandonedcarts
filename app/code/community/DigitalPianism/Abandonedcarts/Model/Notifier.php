@@ -555,15 +555,14 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 				$timezone = Mage::app()->getStore($store)->getConfig(Mage_Core_Model_Locale::XML_PATH_DEFAULT_TIMEZONE);
 				date_default_timezone_set($timezone);
 
-				// If the nodate parameter is set to false
-				if (!$nodate) {
-					// Get the delay provided and convert it to a proper date
-					$delay = Mage::getStoreConfig('abandonedcartsconfig/options/notify_delay');
-					$delay = date('Y-m-d H:i:s', time() - $delay * 24 * 3600);
-				}  else	{
-					// We create a date in the future to handle all abandoned carts
-					$delay = date('Y-m-d H:i:s', strtotime("+7 day"));
-				}
+				// get the user-defined delay or use 0 by default
+                $delay = Mage::getStoreConfig('abandonedcartsconfig/options/notify_delay');
+                
+				if (!$delay) {
+                    $delay = 0;
+				}  
+                
+                $delay = date('Y-m-d H:i:s', time() - $delay * 24 * 3600);
 
 				// Loop through the stores
 				foreach (Mage::app()->getWebsites() as $website) {
