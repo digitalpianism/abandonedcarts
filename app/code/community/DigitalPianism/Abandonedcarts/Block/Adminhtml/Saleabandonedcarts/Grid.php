@@ -78,7 +78,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Saleabandonedcarts_Grid exte
 
     protected function _prepareColumns()
     {
-        $currencyCode = Mage::app()->getStore()->getCurrentCurrencyCode();
+        $currencyCode = $this->_getStore()->getCurrentCurrencyCode();
         
         $this->addColumn('customer_email', array(
             'header' => Mage::helper('abandonedcarts')->__('Customer Email'),
