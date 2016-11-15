@@ -55,7 +55,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
                 array(
                     'product_ids'   =>  'GROUP_CONCAT(e.entity_id)',
                     'product_names'   =>  'GROUP_CONCAT(catalog_flat.name)',
-                    'product_prices'   =>  'SUM(catalog_flat.price)'
+                    'product_prices'   =>  'SUM(catalog_flat.price * quote_items.qty)'
                 )
             );
         } else {
@@ -63,7 +63,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
                 array(
                     'product_ids'   =>  'GROUP_CONCAT(e.entity_id)',
                     'product_names'   =>  'GROUP_CONCAT(catalog_name.value)',
-                    'product_prices'   =>  'SUM(catalog_price.value)'
+                    'product_prices'   =>  'SUM(catalog_price.value * quote_items.qty)'
                 )
             );
         }
@@ -75,6 +75,8 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
 
     protected function _prepareColumns()
     {
+        $currencyCode = Mage::app()->getStore()->getCurrentCurrencyCode();
+        
         $this->addColumn('customer_email', array(
             'header' => Mage::helper('abandonedcarts')->__('Customer Email'),
             'index' => 'customer_email',
@@ -110,6 +112,8 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
         $this->addColumn('product_prices', array(
             'header' => Mage::helper('abandonedcarts')->__('Cart Total'),
             'index' => 'product_prices',
+            'type'      => 'price',
+            'currency_code'  => $currencyCode,
             'filter'    => false
         ));
 
