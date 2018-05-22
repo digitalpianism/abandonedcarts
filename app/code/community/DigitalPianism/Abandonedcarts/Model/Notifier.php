@@ -146,6 +146,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 			$emailTemplateVariables['fullname'] = $args['row']['customer_firstname'].' '.$args['row']['customer_lastname'];
 			$emailTemplateVariables['firstname'] = $args['row']['customer_firstname'];
 			$emailTemplateVariables['productname'][] = $args['row']['product_name'];
+            $emailTemplateVariables['product_id'][] = $args['row']['product_id'];
 
 			// Assign the values to the array of recipients
 			$this->_recipients[$args['row']['customer_email']]['cartId'] = $args['row']['cart_id'];
@@ -166,7 +167,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 			// We increase the product count
 			//$emailTemplateVariables['extraproductcount'] += 1;
 			$emailTemplateVariables['productname'][] = $args['row']['product_name'];
-
+            $emailTemplateVariables['product_id'][] = $args['row']['product_id'];
 			// Add product image
 			$emailTemplateVariables['productimage'][] = $this->_getProductImage($args['row']['product_id']);
 		}
