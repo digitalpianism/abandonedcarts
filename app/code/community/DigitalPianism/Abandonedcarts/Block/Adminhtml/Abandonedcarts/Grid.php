@@ -32,7 +32,8 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
     {
         // Delay
         $delay = Mage::getStoreConfig('abandonedcartsconfig/options/notify_delay');
-        $delay = date('Y-m-d H:i:s', time() - $delay * 24 * 3600);
+        $minDelay = date('Y-m-d H:i:s', time() - $delay * 24 * 3600);
+        $maxDelay = date('Y-m-d H:i:s', time() - $delay * 24 * 3600 - (24*3600));
 
         // Default store and website
         $defaults = $this->_getDefaultStoreAndWebsite();
@@ -47,7 +48,7 @@ class DigitalPianism_Abandonedcarts_Block_Adminhtml_Abandonedcarts_Grid extends 
             );
         }
 
-        $collection = Mage::getModel('abandonedcarts/collection')->getCollection($delay, $defaults[0], $defaults[1]);
+        $collection = Mage::getModel('abandonedcarts/collection')->getCollection($minDelay, $maxDelay, $defaults[0], $defaults[1]);
 
         // Group by to have a nice grid
         if (Mage::helper('catalog/product_flat')->isEnabled()) {

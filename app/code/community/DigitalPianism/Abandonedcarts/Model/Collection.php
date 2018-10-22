@@ -12,7 +12,7 @@ class DigitalPianism_Abandonedcarts_Model_Collection {
      * @param $emails
      * @return mixed
      */
-    public function getCollection($delay, $storeId, $websiteId, $emails = array())
+    public function getCollection($minDelay, $maxDelay, $storeId, $websiteId, $emails = array())
     {
         // Get the product collection
         $collection = Mage::getResourceModel('abandonedcarts/catalog_product_collection')->setStore($storeId);
@@ -23,10 +23,8 @@ class DigitalPianism_Abandonedcarts_Model_Collection {
         $nameId = $eavAttribute->getIdByCode('catalog_product', 'name');
         $priceId = $eavAttribute->getIdByCode('catalog_product', 'price');
 
-        $minDelay = $delay-86400;
-
         // Normal join condition
-        $emailJoin = sprintf('quote_items.quote_id = quote_table.entity_id AND quote_table.items_count > 0 AND quote_table.is_active = 1 AND quote_table.customer_email IS NOT NULL AND quote_table.abandoned_notified = 0 AND quote_table.updated_at < "%s" AND quote_table.updated_at > "%s" AND quote_table.store_id = %s', $delay, $minDelay, $storeId);
+        $emailJoin = sprintf('quote_items.quote_id = quote_table.entity_id AND quote_table.items_count > 0 AND quote_table.is_active = 1 AND quote_table.customer_email IS NOT NULL AND quote_table.abandoned_notified = 0 AND quote_table.updated_at > "%s" AND quote_table.updated_at < "%s" AND quote_table.store_id = %s', $maxDelay, $minDelay, $storeId);
 
         // In case an array of emails has been specified
         if (!empty($emails)) {

@@ -552,7 +552,8 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 				if (!$nodate) {
 					// Get the delay provided and convert it to a proper date
 					$delay = Mage::getStoreConfig('abandonedcartsconfig/options/notify_delay');
-					$delay = date('Y-m-d H:i:s', time() - $delay * 24 * 3600);
+					$maxDelay = date('Y-m-d H:i:s', time() - ($delay * 24 * 3600) - (24 * 3600));
+                    $minDelay = date('Y-m-d H:i:s', time() - $delay * 24 * 3600);
 				}  else	{
 					// We create a date in the future to handle all abandoned carts
 					$delay = date('Y-m-d H:i:s', strtotime("+7 day"));
@@ -573,7 +574,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 							Mage::app()->init($storeId, 'store');
 
 							// Get the collection
-							$collection = Mage::getModel('abandonedcarts/collection')->getCollection($delay, $storeId, $websiteId, $emails);
+							$collection = Mage::getModel('abandonedcarts/collection')->getCollection($minDelay, $maxDelay, $storeId, $websiteId, $emails);
 
 							//$collection->printlogquery(false,true);
 							$collection->load();
