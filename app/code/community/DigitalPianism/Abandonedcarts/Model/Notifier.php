@@ -351,11 +351,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 
 				// Load the quote
 				$quote = Mage::getModel('sales/quote')->load($recipient['cartId']);
-
-				// We change the notification attribute
-				$quote->setAbandonedSaleNotified(1);
-
-				$quote->getResource()->saveAttribute($quote,array('abandoned_sale_notified'));
+				$quote->setAbandonedSaleNotified(1)->save();
 			}
 		}
 	}
@@ -439,11 +435,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 			if (!$dryrun) {
 				// Load the quote
 				$quote = Mage::getModel('sales/quote')->load($recipient['cartId']);
-
-				// We change the notification attribute
-				$quote->setAbandonedNotified(1);
-
-				$quote->getResource()->saveAttribute($quote,array('abandoned_notified'));
+				$quote->setAbandonedNotified(1)->save();
 			}
 		}
 	}
