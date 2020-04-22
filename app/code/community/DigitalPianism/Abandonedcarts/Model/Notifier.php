@@ -647,7 +647,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 	protected function _generateToken($customerEmail)
 	{
 		// Generate the token
-		$token = openssl_random_pseudo_bytes(9, $cstrong);
+		$token = Mage::helper('core')->uniqHash();
 		// Generate the token hash
 		$hash = hash("sha256", $token);
 
