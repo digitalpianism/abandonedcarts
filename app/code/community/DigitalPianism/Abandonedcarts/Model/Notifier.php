@@ -283,6 +283,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 				Mage::getDesign()->setArea('adminhtml');
 			} else {
 				Mage::getDesign()->setArea('frontend');
+                Mage::app()->getTranslator()->init('frontend', true);
 			}
 			// Get the transactional email template
 			$templateId = Mage::getStoreConfig('abandonedcartsconfig/email/email_template_sale');
@@ -376,6 +377,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 				Mage::getDesign()->setArea('adminhtml');
 			} else {
 				Mage::getDesign()->setArea('frontend');
+                Mage::app()->getTranslator()->init('frontend', true);
 			}
 
 			// Get the transactional email template

@@ -12,6 +12,11 @@ http://www.magentocommerce.com/magento-connect/abandoned-carts-notifications.htm
 
 # Release Notes
 
+## 1.0.8
+Thanks to gstrat88 for the bug fix
+
+- Fix a bug where the translations need to be loaded: https://github.com/digitalpianism/abandonedcarts/issues/26
+
 ## 1.0.7
 Thanks to Septoctobre for all the bug reports and pull requests
 
