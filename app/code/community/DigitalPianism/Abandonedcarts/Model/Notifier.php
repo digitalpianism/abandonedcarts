@@ -146,6 +146,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 			$emailTemplateVariables['fullname'] = $args['row']['customer_firstname'].' '.$args['row']['customer_lastname'];
 			$emailTemplateVariables['firstname'] = $args['row']['customer_firstname'];
 			$emailTemplateVariables['productname'][] = $args['row']['product_name'];
+            $emailTemplateVariables['product_id'][] = $args['row']['product_id'];
 
 			// Assign the values to the array of recipients
 			$this->_recipients[$args['row']['customer_email']]['cartId'] = $args['row']['cart_id'];
@@ -166,7 +167,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 			// We increase the product count
 			//$emailTemplateVariables['extraproductcount'] += 1;
 			$emailTemplateVariables['productname'][] = $args['row']['product_name'];
-
+            $emailTemplateVariables['product_id'][] = $args['row']['product_id'];
 			// Add product image
 			$emailTemplateVariables['productimage'][] = $this->_getProductImage($args['row']['product_id']);
 		}
@@ -351,11 +352,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 
 				// Load the quote
 				$quote = Mage::getModel('sales/quote')->load($recipient['cartId']);
-
-				// We change the notification attribute
-				$quote->setAbandonedSaleNotified(1);
-
-				$quote->getResource()->saveAttribute($quote,array('abandoned_sale_notified'));
+				$quote->setAbandonedSaleNotified(1)->save();
 			}
 		}
 	}
@@ -440,11 +437,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 			if (!$dryrun) {
 				// Load the quote
 				$quote = Mage::getModel('sales/quote')->load($recipient['cartId']);
-
-				// We change the notification attribute
-				$quote->setAbandonedNotified(1);
-
-				$quote->getResource()->saveAttribute($quote,array('abandoned_notified'));
+				$quote->setAbandonedNotified(1)->save();
 			}
 		}
 	}
@@ -561,7 +554,8 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 				if (!$nodate) {
 					// Get the delay provided and convert it to a proper date
 					$delay = Mage::getStoreConfig('abandonedcartsconfig/options/notify_delay');
-					$delay = date('Y-m-d H:i:s', time() - $delay * 24 * 3600);
+					$maxDelay = date('Y-m-d H:i:s', time() - ($delay * 24 * 3600) - (24 * 3600));
+                    $minDelay = date('Y-m-d H:i:s', time() - $delay * 24 * 3600);
 				}  else	{
 					// We create a date in the future to handle all abandoned carts
 					$delay = date('Y-m-d H:i:s', strtotime("+7 day"));
@@ -582,7 +576,7 @@ class DigitalPianism_Abandonedcarts_Model_Notifier extends Mage_Core_Model_Abstr
 							Mage::app()->init($storeId, 'store');
 
 							// Get the collection
-							$collection = Mage::getModel('abandonedcarts/collection')->getCollection($delay, $storeId, $websiteId, $emails);
+							$collection = Mage::getModel('abandonedcarts/collection')->getCollection($minDelay, $maxDelay, $storeId, $websiteId, $emails);
 
 							//$collection->printlogquery(false,true);
 							$collection->load();
